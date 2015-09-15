@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0133)http://www.17sucai.com/preview/220220/2014-11-11/%E8%B4%AD%E7%89%A9%E8%BD%A6%EF%BC%88%E6%BA%90%E4%BB%A3%E7%A0%81%EF%BC%89ok/demo.html -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>购物车</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="http://www.17sucai.com/preview/220220/2014-11-11/%E8%B4%AD%E7%89%A9%E8%BD%A6%EF%BC%88%E6%BA%90%E4%BB%A3%E7%A0%81%EF%BC%89ok/css/style.css">
+
+
+
+</head>
+
+<body>
+
+    <div class="catbox">
+
+        <table id="cartTable">
+            <thead>
+                <tr>
+                    <th>
+                        <label>
+                            <input class="check-all check" type="checkbox">&nbsp;全选</label>
+                    </th>
+                    <th>商品</th>
+                    <th>单价</th>
+                    <th>数量</th>
+                    <th>小计</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="cart">
+                <% carts.forEach(function(cart){ %>
+                    <tr class="" id="cart<%=cart.commodity_id%>">
+                        <td class="checkbox">
+                            <input class="check-one check" value="<%=cart.commodity_id%>" type="checkbox">
+                        </td>
+                        <td class="goods">
+                            <img src="<%=cart.commodity_img%>" alt=""><span><%=cart.commodity_name%></span>
+                        </td>
+                        <td class="price">
+                            <%=cart.commodity_price%>
+                        </td>
+                        <td class="count"><span class="reduce"></span>
+                            <input class="count-input" type="text" value="<%=cart.count%>"><span class="add">+</span>
+                        </td>
+                        <td class="subtotal">
+                            <%=cart.price%>
+                        </td>
+                        <td class="operation"><span class="delete" onclick="del(<%=cart.commodity_id%>)">删除</span>
+                        </td>
+                    </tr>
+                    <% }) %>
+
+            </tbody>
+        </table>
+
+        <div class="foot" id="foot">
+            <label class="fl select-all">
+                <input type="checkbox" class="check-all check">&nbsp;全选</label>
+            <a class="fl delete" onclick="deleteAll()" href="javascript:;">删除</a>
+            <div class="fr closing">结 算</div>
+            <div class="fr total">合计：￥<span id="priceTotal">0.00</span>
+            </div>
+            <div class="fr selected" id="selected">已选商品<span id="selectedTotal">0</span>件<span class="arrow up">︽</span><span class="arrow down">︾</span>
+            </div>
+            <div class="selected-view">
+                <div id="selectedViewList" class="clearfix"></div>
+                <span class="arrow">◆<span>◆</span></span>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="/js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="/js/demo.js"></script>
+
+    <script>
+        function del(commodity_id) {
+            //http://203.195.150.220:8080/api/deleteCarts.action?commodity_id=2
+
+            if (!confirm('确定要删除？')) {
+
+                return;
+            }
+            var url = '/api/deleteCarts.action?commodity_id=' + commodity_id;
+
+            $.ajax({
+                url: url,
+                data: [],
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                dataType: 'json',
+                type: 'get',
+                success: function(res) {
+
+
+                    if (res.result) {
+                        alert(res.feedback);
+                        $('#cart' + commodity_id).remove();
+
+                    } else {
+
+
+                        alert(res.feedback)
+
+
+                    }
+
+                },
+                error: function(res, erro) {
+
+                    alert('网络出错！');
+
+
+                },
+            });
+
+
+        }
+
+        function deleteAll() {
+            var commodity_id = "";
+            if ($('#cart .check:checked').length == 0) {
+
+                alert('请选择要删除的商品！');
+            }
+            for (var i = 0; i < $('#cart .check:checked').length; i++) {
+
+                commodity_id = commodity_id + $('#cart .check:checked').eq(i).val() + ",";
+            }
+            commodity_id = commodity_id.substring(0, commodity_id.length - 1);
+            if (!confirm('确定要删除？')) {
+
+                return;
+            }
+            var url = '/api/deleteCarts.action?commodity_id=' + commodity_id;
+
+            $.ajax({
+                url: url,
+                data: [],
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                dataType: 'json',
+                type: 'get',
+                success: function(res) {
+
+
+                    if (res.result) {
+                        alert(res.feedback);
+                        location.reload();
+
+                    } else {
+
+
+                        alert(res.feedback)
+
+
+                    }
+
+                },
+                error: function(res, erro) {
+
+                    alert('网络出错！');
+
+
+                },
+            });
+
+
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gbk">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="/css/register.min.css" type=text/css rel=stylesheet>
+
+    <title>所有用户</title>
+
+    <style>
+        .province ul,gbk
+        .city ul {
+            background: #fff;
+        }
+        .province ul,
+        .city ul {
+            width: 100%;
+            margin: auto;
+            border-bottom: 1px solid #eee;
+        }
+        ul,
+        li {
+            padding: 0;
+            list-style: none;
+        }
+        #header1 {
+            position: fixed;
+            z-index: 999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 45px;
+            line-height: 45px;
+            background-color: #3199e8;
+            background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #3199e8), color-stop(0.05, #3199e8), color-stop(1, #3199e8));
+            background-image: -moz-linear-gradient(top, #3199e8, #3199e8 5%, #3199e8);
+            background-image: -o-linear-gradient(top, #3199e8, #3199e8 5%, #3199e8);
+            padding: 0;
+            color: #eee;
+            font-size: 20px;
+            text-align: center;
+        }
+        .back {
+            float: left;
+            height: 28px;
+            line-height: 28px;
+            color: #fff;
+        }
+        .back icon {
+            display: block;
+            height: 28px;
+            width: 28px;
+            background-size: 75%;
+            background-position: 5px 10px;
+        }
+        .header-info {
+            float: right;
+            height: 40px;
+            line-height: 40px;
+            width: 60px;
+            color: #fff;
+            background-size: 75%;
+            background-position: 5px 10px;
+        }
+        .header-title {
+            float: left;
+            height: 46px;
+            line-height: 46px;
+            text-align: left;
+            color: #fff;
+        }
+        .province,
+        .city {
+            position: absolute;
+            top: 45px;
+            left: 0;
+            width: 100%;
+            background-color: #eee;
+        }
+        .province ul,
+        .city ul {
+            width: 100%;
+            margin: auto;
+            border-bottom: 1px solid #eee;
+        }
+        .province ul li,
+        .city ul li {
+            height: 45px;
+            line-height: 45px;
+            border-bottom: 1px solid #eee;
+        }
+        .province ul,
+        .city ul {
+            background: #fff;
+        }
+        .province ul:last-child,
+        .city ul:last-child {
+            border: none;
+        }
+        .province .selected-li {
+            border: none;
+        }
+        .province .select-province {
+            margin-top: 20px;
+        }
+        .province ul li,
+        .city ul li {
+            width: 92%;
+            margin: auto;
+        }
+        .selected {
+            float: right;
+            color: #999;
+            font-size: 12px;
+            line-height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="fade_box" id="fadeBox"></div>
+    <!--头部-->
+    <div class="header">
+
+        <img src="http://2i.vt2020.com/chat/images/nav_back.png" />
+        </a><span>所以学员</span>
+    </div>
+   <section>
+	   <table id='user'>
+	  
+	   
+	   
+	   </table>
+       
+    </section>
+   
+   
+    <script src="/js/jquery.min.js"></script>
+
+    <script>
+        (function($, window, document, undefined) {
+//http://203.195.150.220:8080/api/register.action?user_name=byy&phone=14789945242&password=byy&province=%E6%B9%96%E5%8D%97&city=%E9%95%BF%E6%B2%99&cid=156156665616
+            var fn = new Object();
+          
+            fn.postUrl = 'http://203.195.150.220/api/getUser.action';
+        
+  
+
+                   
+                    $.ajax({
+                        url: fn.postUrl,
+                        data: [],
+                        dataType: 'json',
+						 contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+                        type: 'get',
+                        success: function(data) {
+
+                          
+                            if (data.result) {
+                                  for(var i=0;i<data.data.length;i++){
+								  var user=data.data[i];
+								 var tr=' <tr><td>'+user.user_name+'</td><td>'+user.user_id+'</td><td>'+user.phone+'</td><td>'+user.cid+'</td> <td>'+user.province+'</td<td>'+user.city+'</td></tr>';
+								 
+								 $('#user').append(tr);
+								  
+								  }
+                               
+                            } else {
+
+                            
+
+
+                            }
+                        },
+                        error: function(res, erro) {
+
+                           
+                        },
+                    });
+
+                
+
+       
+        
+
+          
+
+        })(window.jQuery, window, document);
+
+   
+    </script>
+
+</body>
+
+</html>

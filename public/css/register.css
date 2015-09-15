@@ -1,0 +1,138 @@
+        body {
+            font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", sans-serif;
+            font-size: 16px;
+        }
+        .header {
+            display: none;
+            position: absolute;
+            left: 0;
+            text-align: center;
+            top: 0;
+            height: 50px;
+            line-height: 50px;
+            width: 100%;
+            background: #52e453 none repeat scroll 0% 0%;
+            z-index: 999999;
+            color: #fff;
+        }
+        .close {
+            position: absolute;
+            z-index: 10;
+            right: 20px;
+            top: 20px;
+            color: #fff;
+            cursor: pointer;
+            line-height: 20px;
+        }
+        .close {
+            top: 15px;
+            left: 1px;
+            width: 30px;
+            height: 20px;
+        }
+        .close img {
+            width: 25px;
+            height: 25px;
+            margin-top: -2px;
+        }
+        .login-box {
+            width: 96%;
+            margin: auto;
+            margin-top: 0px;
+        }
+        .login-box .items {
+            margin-top: 20px;
+            border: 1px solid #C6E7C6;
+            height: 40px;
+            border-radius: 4px;
+        }
+        .login-box .icon {
+            width: 48px;
+            display: inline-block;
+            height: 100%;
+            text-align: left;
+            line-height: 40px;
+            font-size: 16px;
+            padding-left: 5px;
+        }
+        .login-box .input-box {
+            width: 78%;
+            height: 100%;
+            display: inline-block;
+            float: right;
+        }
+        .login-box .input-box input,
+        .login-box .input-box select {
+            height: 38px;
+            padding: 0;
+            margin: 0;
+            width: 96%;
+            border: none;
+            font-size: 16px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        .deal::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+        .deal::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            /* 有无看不出差别 */
+        }
+        .submit {
+            width: 96%;
+            margin: auto;
+            margin-top: 50px;
+        }
+        .submit button {
+            width: 100%;
+            padding: 12px 0;
+            border: 1px solid #52e453;
+            border-radius: 4px;
+            background-color: #52e453;
+            color: #fff;
+            font-family: '微软雅黑';
+            font-size: 16px;
+        }
+        .fade_box {
+            width: 60%;
+            height: 40px;
+            line-height: 40px;
+            background: rgba(0, 0, 0, 0.4);
+            color: #fff;
+            font-size: 1.1em;
+            position: fixed;
+            top: 30%;
+            left: 20%;
+            z-index: 1002;
+            text-align: center;
+            display: none;
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+        }
+        #loading {
+            height: 40px;
+            position: absolute;
+            line-height: 40px;
+            top: 30%;
+            width: 60%;
+            left: 20%;
+            background: #000;
+            opacity: 0.4;
+            line-height: 40px;
+            border-radius: 4px;
+            color: #fff;
+            text-align: center;
+            z-index: 9999;
+        }
+        #loading img {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin-right: 4px;
+        }
+        .button-loading {
+            background: #ccc !important;
+            border: 1px solid #ddd !important;
+        }

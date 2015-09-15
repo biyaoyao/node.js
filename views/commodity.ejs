@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>购物中心</title>
+    <link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <!-- jQuery (necessary JavaScript plugins) -->
+
+    <!-- Custom Theme files -->
+    <link href="/css/style.css" rel='stylesheet' type='text/css' />
+    <!-- Custom Theme files -->
+    <!--//theme-style-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link href="/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+    <style>
+        ul.grid_2 li {
+            margin-top: 20px;
+        }
+        .button {
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 0.85em;
+            border: none;
+            margin: 20px 0;
+            /* float: none; */
+            margin-right: 5%;
+        }
+        .button:hover {
+            background: rgb(9, 209, 182);
+        }
+        .item_price {
+            cursor: pointer;
+        }
+        a:hover,
+        a:focus {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- header_top -->
+    <div class="top_bg">
+        <div class="container">
+            <div class="header_top">
+                <div class="top_right">
+                    <ul>
+                        <li><a href="#">帮助</a>
+                        </li>|
+                        <li><a href="contact.html">联系我</a>
+                        </li>|
+                        <li>
+                            <a href="#">
+                                <%=user_name%>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="top_left">
+                    <h2><span></span> 联系我: 14789945242</h2>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <!-- header -->
+
+    <div class="special">
+        <div class="container">
+            <h3>商品简介</h3>
+            <div class="specia-top">
+                <ul class="grid_2">
+
+
+
+                    <% commodity.forEach(function(name){ %>
+                        <li>
+                            <a href="#">
+                                <img src="<%=name.commodity_img%>" class="img-responsive" alt="">
+                            </a>
+                            <div class="special-info grid_1 simpleCart_shelfItem">
+                                <h5> <%=name.commodity_name%></h5>
+                                <div class="item_add"><span class="item_price"><h6>价格:￥
+                                    <%=name.commodity_price%></h6></span>
+                                </div>
+                                <div class="item_add"><span class="item_price"><a  onclick="addToCart('<%=name.commodity_id%>','<%=name.commodity_name%>','<%=name.commodity_price%>','<%=name.commodity_img%>')">加入购物车</a></span>
+                                </div>
+                            </div>
+                        </li>
+                        <% }) %>
+
+                </ul>
+            </div>
+        </div>
+        <div>
+            <button onclick="location.href='/page/carts.action'" class="button">购物车</button>
+        </div>
+    </div>
+    <script type='text/javascript' src="/js/jquery-1.11.1.min.js"></script>
+    <script>
+        function addToCart(commodity_id, commodity_name, commodity_price, commodity_img) {
+
+            ///api/addToCarts.action
+
+
+            var url = '/api/addToCarts.action?user_id=<%=user_id%>&commodity_id=' + commodity_id + '&commodity_name=' + commodity_name + '&commodity_price=' + commodity_price + '&commodity_img=' + commodity_img + '&commodity_status=0';
+
+            $.ajax({
+                url: url,
+                data: [],
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                dataType: 'json',
+                type: 'get',
+                success: function(data) {
+
+
+                    if (data.result) {
+                        alert('添加成功！');
+
+
+                    } else {
+
+
+                        alert('添加失败！');
+                        window.reload();
+
+                    }
+                },
+                error: function(res, erro) {
+
+                    alert('网络出错！');
+                    window.reload();
+
+                },
+            });
+
+
+
+
+        }
+    </script>
+</body>
+
+</html>

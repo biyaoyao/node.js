@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+            <meta name="apple-mobile-web-app-capable" content="yes">
+            <meta name="apple-mobile-web-app-status-bar-style" content="black">
+            <link rel="stylesheet" type="text/css" href="http://2i.vt2020.com/chat/chat.jsp.css?version=1.66">
+            <title>2i</title>
+            <style>
+                .mod-input__inputbox {
+                    width: 60%;
+                    margin-left: 5%;
+                    float: none;
+                    overflow: hidden;
+                    display: inline-block;
+                }
+                .more-service {
+                    float: right;
+                    color: #fff;
+                }
+            </style>
+
+        </head>
+
+        <body>
+            <div id="loading" class="loading">
+                <div class="loading-text" id="loading">拼命加载中...
+                    <br>
+                    <img src="messageBox/loading.gif" style="width: 40px;
+height: 40px;">
+                </div>
+            </div>
+            <div id="header" style="">
+                <div onclick="history()" class="back" style="height: 100%;">
+                    <icon>
+                        <img src="http://2i.vt2020.com/chat/images/nav_back.png" style="width:28px;height:28px;margin-top: 10px;
+margin-right: 5px;" />
+                    </icon>
+                </div>
+                <script>
+                    function history() {
+                        WeixinJSBridge.call('closeWindow');
+                        //                      window.history.g(-1);
+
+
+                    }
+                </script>
+                <div class="header-title" style="margin-left: -5px;">家人群</div>
+                <div onclick="doctorInfo()" class="header-info">
+                    <img src="http://2i.vt2020.com/chat/images/info.png" style="width:25px;height:25px;margin-top: 10px;
+margin-right: 0px;" />
+                </div>
+                <div onclick="doctorInfo()" class="more-service"></div>
+            </div>
+
+            <div id="wrapper" style="
+position: relative;
+top: 25px;margin-bottom:140px;;">
+                <div id="scroller">
+
+                    <div class="loadMore" id="loadMore" onclick="loadMore()" style="" align="center"><a style="display: block;color:#fff;font-size:12px; 
+            margin: auto;" id="more_feed">点击查看更多</a>
+                    </div>
+                    <div id="chat_list">
+                        <ul id="thelist">
+
+                            <li id="">
+                                <div class="chat-row" style="clear:both;">
+                                    <div class="msg-time">17:0</div>
+                                    <div class="user-msg">
+                                        <div class="user-photo">
+                                            <a href="http://2i.vt2020.com/user/turn2UserHomePage.action">
+                                                <img style="width:40px; height:40px;" src="${consult_info.user_info.user_photourl}">
+                                            </a>
+                                        </div>
+                                        <div class="angle-right-white"></div>
+                                        <div class="angle-right"></div>
+                                        <div class="user-text">烦人(O_O)？他</div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li id="">
+                                <div class="chat-row" style="clear:both;">
+                                    <div class="msg-time">17:0</div>
+                                    <div class="user-msg">
+                                        <div class="user-photo">
+                                            <a href="http://2i.vt2020.com/user/turn2UserHomePage.action">
+                                                <img style="width:40px; height:40px;" src="${consult_info.user_info.user_photourl}">
+                                            </a>
+                                        </div>
+                                        <div class="angle-right-white" style="border-color: transparent transparent transparent #FCFFF9;"></div>
+                                        <div class="angle-right"></div>
+                                        <div class="user-text" style="background-color: #fff;background-color: #fff;
+padding: 5px;
+padding-bottom: 1px;">
+                                            <img style="width:100px" src="${consult.description}" onclick="previewImage_user(this.src)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+
+
+
+                            <li id="">
+                                <div class="chat-row" style="clear:both;">
+                                    <div class="msg-time">17:0</div>
+                                    <div class="doctor-msg">
+                                        <div class="doctor-photo">
+                                            <a onclick="doctorInfo()">
+                                                <img style="width:40px; height:40px;" src="${consult.doctor_photourl}">
+                                            </a>
+                                        </div>
+
+                                        <div class="angle-left-white"></div>
+                                        <div class="angle-left"></div>
+
+                                        <div class="doctor-text">4台3他</div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li id="">
+                                <div class="chat-row" style="clear:both;">
+                                    <div class="msg-time">17:0</div>
+                                    <div class="doctor-msg">
+                                        <div class="doctor-photo">
+                                            <a onclick="doctorInfo()">
+                                                <img style="width:40px; height:40px;" src="${consult.doctor_photourl}">
+                                            </a>
+                                        </div>
+
+                                        <div class="angle-left-white"></div>
+                                        <div class="angle-left"></div>
+
+                                        <div class="doctor-text">
+                                            <img style="width:100px;" src="${consult.description}" onclick="previewImage_doctor(this.src)" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+
+
+
+
+                        </ul>
+                        <ul id="thelist1">
+                            <li>&nbsp;</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <div class="mod-input__inner" name="mod-input__inner" style="bottom: 0px;">
+                    <div class="mod-input__bar" style="display: inline-block; width: 98%;">
+                        <div id="caseexist">
+                            <div class="mod-input__submit ui-fl-r ui-pl-medium" style="width: 30px;
+margin: 0;
+padding: 0;
+text-align: center;
+float: left;
+display: inline-block;
+height: 30px;">
+                                <input type="hidden" id="uptoken_url" value="http://2i.vt2020.com/user/getUpToken.action?bucketname=shiqi-2i-consult">
+                                <input type="hidden" id="domain" value="http://shiqi-2i-consult.qiniudn.com/">
+                                <div id="container">
+
+                                    <img id="pickfiles" src="http://2i.vt2020.com/doctor-info/appoint_gray.png" />
+                                    <input type="file" accept="image/*" id="profilePhotoFileUpload" style="position: relative;
+  top: -37px;
+  width: 32px;
+  height: 32px;
+  border: 1px solid red;  opacity: 0;" onchange="uploadfile()">
+                                </div>
+
+                            </div>
+
+
+                            <div class="mod-input__inputbox">
+                                <input onfocus="Fixed()" onblur="remveFixed()" class="input_text input_fluid" id="textInput" type="text">
+                            </div>
+                            <div class="mod-input__submit ui-fl-r ui-pl-medium" style="width: 20%; margin: 0; padding: 0; text-align: center; display: inline-block;height: 30px;"><a href="javascript:sendText();" class="button button_green button_round" id="sendmBtn">发送</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="buttom"></div>
+            <script type="text/javascript" src="http://2i.vt2020.com/js_imagedemo/bmob.js"></script>
+            <script type="text/javascript " src="http://2i.vt2020.com/js/zepto.min.js"></script>
+            <script type="text/javascript " src="http://2i.vt2020.com/js/get_para.js "></script>
+            <script type="text/javascript " src="http://2i.vt2020.com/javascripts/socket.io.js "></script>
+            <script type="text/javascript " src="http://2i.vt2020.com/javascripts/yunba-1.0.1.js "></script>
+            <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js "></script>
+            <script type="text/javascript " src="http://2i.vt2020.com/chat/chat.jsp.js?version=1.4"></script>
+
+        </body>
+
+</html>
+
+</html>
